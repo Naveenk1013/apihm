@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AP-IHM | Asia Pacific Institute of Hotel Management</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --burgundy:     #6b1530;
+      --burgundy-deep:#4a0e20;
+      --burgundy-mid: #8C1E3C;
+      --gold:         #C9941A;
+      --gold-light:   #E8B94A;
+      --gold-pale:    #F5E6C0;
+      --cream:        #FDF6EE;
+      --ivory:        #FAF3E8;
+      --dark:         #1A0810;
+      --charcoal:     #2C1A24;
+      --text:         #3D2030;
+      --text-muted:   #7A5A68;
+      --white:        #FFFFFF;
+      --shadow-card:  0 4px 32px rgba(107,21,48,0.10);
+      --shadow-hover: 0 12px 48px rgba(107,21,48,0.22);
+      --radius-sm:    8px;
+      --radius-md:    16px;
+      --radius-lg:    28px;
+      --transition:   0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--dark);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.72s ease, transform 0.72s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left  { opacity: 0; transform: translateX(-40px); transition: opacity 0.72s ease, transform 0.72s ease; }
+    .reveal-right { opacity: 0; transform: translateX(40px);  transition: opacity 0.72s ease, transform 0.72s ease; }
+    .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translate(0); }
+    [data-delay="1"] { transition-delay: 0.10s; }
+    [data-delay="2"] { transition-delay: 0.20s; }
+    [data-delay="3"] { transition-delay: 0.30s; }
+    [data-delay="4"] { transition-delay: 0.40s; }
+    [data-delay="5"] { transition-delay: 0.50s; }
+    [data-delay="6"] { transition-delay: 0.60s; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ivory); }
+    ::-webkit-scrollbar-thumb { background: var(--burgundy); border-radius: 3px; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 0;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(253,246,238,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(107,21,48,0.10);
+      padding: 0.7rem 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .nav-logo-mark {
+      height: 60px;
+      width: auto;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark svg { width: 26px; height: 26px; }
+    .nav-logo-text { line-height: 1.1; }
+    .nav-logo-text strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+    .nav-logo-text span {
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-size: 0.87rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .nav-links a:hover { color: var(--burgundy); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--burgundy);
+      color: var(--white) !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.84rem !important;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+      letter-spacing: 0 !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--burgundy-deep) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--burgundy); border-radius: 2px; transition: var(--transition); display: block; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      gap: 3rem;
+      padding: 7rem 0 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    .hero-slide {
+      width: 33.333%;
+      height: 100%;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hero-bg-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.25) saturate(0.6);
+    }
+    .hero-bg-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(74, 14, 32, 0.247) 0%,
+        rgba(26,8,16,0.80) 50%,
+        rgba(107,21,48,0.70) 100%
+      );
+    }
+    .hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding-left: 2rem;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s forwards;
+    }
+    .hero-title strong {
+      display: block;
+      font-weight: 700;
+      color: var(--gold-light);
+      font-style: italic;
+    }
+    .hero-subtitle {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.50s forwards;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.6rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(201,148,26,0.35);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.4rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.78s forwards;
+    }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+      margin-top: 0.25rem;
+    }
+
+    /* ===== FORM CARD ===== */
+    .hero-form-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
+      padding: 2.8rem 2.2rem;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+      opacity: 0;
+      animation: slideLeft 0.9s 0.5s forwards;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .hero-form-card {
+        background: rgba(255, 255, 255, 0.82);
+      }
+    }
+    .form-card-top {
+      margin-bottom: 1.8rem;
+    }
+    .form-card-top h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--burgundy-deep);
+      line-height: 1.15;
+    }
+    .form-card-top p {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    .form-divider {
+      width: 50px; height: 3px;
+      background: var(--gold);
+      margin: 1.1rem 0;
+      border-radius: 2px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--burgundy-mid);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid rgba(107,21,48,0.15);
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.94rem;
+      color: var(--text);
+      background: rgba(255,255,255,0.6);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,148,26,0.12);
+      background: var(--white);
+      transform: translateY(-1px);
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B1530' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+      padding-right: 2.8rem;
+      cursor: pointer;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 1.1rem;
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-deep));
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+      box-shadow: 0 8px 20px rgba(107,21,48,0.25);
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(107,21,48,0.4);
+      background: linear-gradient(135deg, var(--burgundy-mid), var(--burgundy));
+    }
+    .btn-submit:active {
+      transform: translateY(-1px) scale(1);
+    }
+    .btn-submit::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,21,48,0.35); }
+    .form-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.9rem;
+    }
+
+    /* ===== STATS TICKER ===== */
+    .stats-strip {
+      background: var(--burgundy);
+      padding: 1.1rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .stats-strip-inner {
+      display: flex;
+      gap: 4rem;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+    }
+    .stats-strip-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-shrink: 0;
+    }
+    .stats-strip-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+    .stats-strip-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.06em;
+    }
+    .stats-strip-sep {
+      width: 1px; height: 28px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 6rem 0; }
+    section:nth-child(even) { background: var(--ivory); }
+
+    /* ===== WHY CHOOSE ===== */
+    #why {
+      background: var(--white);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+    .why-visual {
+      position: relative;
+    }
+    .why-img-main {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+    .why-img-accent {
+      position: absolute;
+      bottom: -1.8rem;
+      right: -1.8rem;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 5px solid var(--white);
+      box-shadow: var(--shadow-card);
+    }
+    .why-badge-float {
+      position: absolute;
+      top: 1.5rem;
+      left: -1.5rem;
+      background: var(--burgundy);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.4rem;
+      text-align: center;
+      box-shadow: var(--shadow-hover);
+    }
+    .why-badge-float strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .why-badge-float span {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      letter-spacing: 0.06em;
+    }
+    .why-features { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .why-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border-left: 3px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor: default;
+    }
+    .why-feature:hover {
+      border-left-color: var(--gold);
+      box-shadow: var(--shadow-card);
+      transform: translateX(4px);
+    }
+    .why-feature-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--burgundy);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .why-feature-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.2rem;
+    }
+    .why-feature-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ===== PROGRAMS ===== */
+    #programs { background: var(--cream); }
+    .programs-header { text-align: center; margin-bottom: 3.5rem; }
+    .programs-header .section-title { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 1200px) {
+      .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .program-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+    .program-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .program-card-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+    }
+    .program-card-body { padding: 1.8rem; }
+    .program-card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+    .program-card-body .prog-full {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .prog-duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--ivory);
+      border-radius: 50px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-bottom: 1.1rem;
+    }
+    .prog-highlights { display: flex; flex-direction: column; gap: 0.55rem; }
+    .prog-highlight {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .prog-highlight::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .prog-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.4rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      transition: gap var(--transition);
+    }
+    .prog-link:hover { gap: 0.9rem; }
+
+    /* ===== CURRICULUM ACCORDION ===== */
+    #curriculum { background: var(--white); }
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .curriculum-intro p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .curriculum-pill-row {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+    }
+    .curriculum-pill {
+      background: var(--cream);
+      border: 1px solid var(--gold-pale);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      color: var(--burgundy);
+      font-weight: 500;
+    }
+    .accordion { display: flex; flex-direction: column; gap: 0.8rem; }
+    .acc-item {
+      border: 1.5px solid #EDD8E2;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+    .acc-item.open { border-color: var(--gold); }
+    .acc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      cursor: pointer;
+      background: var(--cream);
+      transition: background var(--transition);
+      user-select: none;
+    }
+    .acc-item.open .acc-header { background: var(--white); }
+    .acc-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .acc-year {
+      background: var(--burgundy);
+      color: var(--white);
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .acc-header h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .acc-header span { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.1rem; }
+    .acc-chevron {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--ivory);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+      flex-shrink: 0;
+    }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); background: var(--gold-pale); }
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 1.4rem;
+    }
+    .acc-item.open .acc-body { max-height: 400px; padding: 0 1.4rem 1.3rem; }
+    .acc-subjects { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.8rem; }
+    .acc-subject {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .acc-subject-dot {
+      width: 5px; height: 5px; flex-shrink: 0;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 0.5rem;
+    }
+    .acc-focus {
+      margin-top: 1rem;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, var(--gold-pale), var(--cream));
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      color: var(--burgundy);
+      font-style: italic;
+    }
+
+    /* ===== CAREER ===== */
+    #careers { background: var(--dark); position: relative; overflow: hidden; }
+    #careers::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107,21,48,0.5) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .careers-header { text-align: center; margin-bottom: 3.5rem; }
+    .careers-header .section-title { color: var(--white); font-size: clamp(2.4rem, 4vw, 3.4rem); }
+    .careers-header .section-label { color: var(--gold); }
+    .careers-header p { color: rgba(255,255,255,0.6); font-size: 0.97rem; max-width: 580px; margin: 0.8rem auto 0; }
+    .careers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+    .career-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,148,26,0.2);
+      border-radius: var(--radius-md);
+      padding: 1.6rem 1.3rem;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .career-card:hover {
+      background: rgba(201,148,26,0.08);
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .career-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .career-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .career-card p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+    /* ===== INFRASTRUCTURE ===== */
+    #infrastructure { background: var(--cream); }
+    .infra-header { text-align: center; margin-bottom: 3.5rem; }
+    .infra-header .section-title { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+    .infra-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+    .infra-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .infra-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .infra-card-img {
+      width: 100%; height: 180px; object-fit: cover;
+    }
+    .infra-card-body { padding: 1.4rem; }
+    .infra-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .infra-card-body h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .infra-card-body p { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+    /* ===== FACULTY ===== */
+    #faculty { background: var(--white); }
+    .faculty-header { text-align: center; margin-bottom: 3.5rem; }
+    .faculty-header .section-title { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .faculty-card {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 1.8rem;
+      border: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .faculty-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--burgundy), var(--gold));
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      transform-origin: left;
+    }
+    .faculty-card:hover { border-color: var(--gold-pale); box-shadow: var(--shadow-card); transform: translateY(-4px); }
+    .faculty-card:hover::before { transform: scaleX(1); }
+    .faculty-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.1rem;
+    }
+    .faculty-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .faculty-role { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .faculty-tag {
+      display: inline-block;
+      background: var(--gold-pale);
+      color: var(--burgundy);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      margin-top: 0.7rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--ivory); }
+    .testi-header { text-align: center; margin-bottom: 3.5rem; }
+    .testi-header .section-title { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+    .testi-track-wrap { overflow: hidden; }
+    .testi-track {
+      display: flex;
+      gap: 1.6rem;
+      animation: scrollTestis 30s linear infinite;
+    }
+    .testi-track:hover { animation-play-state: paused; }
+    .testi-card {
+      flex-shrink: 0;
+      width: 360px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+    .testi-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      line-height: 0.6;
+      color: var(--gold-pale);
+      margin-bottom: 0.5rem;
+    }
+    .testi-text {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+    .testi-author { display: flex; align-items: center; gap: 0.9rem; }
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--burgundy), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .testi-name { font-weight: 600; font-size: 0.87rem; color: var(--dark); }
+    .testi-batch { font-size: 0.73rem; color: var(--text-muted); }
+    .testi-stars { color: var(--gold); font-size: 0.8rem; margin-top: 0.15rem; }
+
+    /* ===== CTA SECTION ===== */
+    #cta-section {
+      background: linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 50%, #9B2040 100%);
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      border-radius: 50%;
+      background: rgba(201,148,26,0.15);
+      pointer-events: none;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .cta-title strong { font-weight: 700; color: var(--gold-light); font-style: italic; }
+    .cta-sub { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 480px; margin: 0 auto 2.4rem; }
+    .cta-buttons { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 2.2rem;
+      background: var(--gold);
+      color: var(--dark);
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(201,148,26,0.4); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 2.2rem;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      padding: 4rem 0 1.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr 0.8fr 1.8fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand p {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.75;
+      margin-top: 1rem;
+      max-width: 280px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 0.7rem;
+      margin-top: 1.4rem;
+    }
+    .social-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      transition: background var(--transition), color var(--transition);
+    }
+    .social-btn:hover { background: var(--gold); color: var(--dark); }
+    .footer-col h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-campus { margin-bottom: 1.8rem; }
+    .footer-campus:last-child { margin-bottom: 0; }
+    .footer-campus h6 {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .footer-campus-info {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.6;
+    }
+    .footer-campus-info p { margin-bottom: 0.3rem; }
+    .footer-campus-info a { color: var(--gold-pale); transition: color var(--transition); }
+    .footer-campus-info a:hover { color: var(--white); }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.48);
+      transition: color var(--transition), padding-left var(--transition);
+    }
+    .footer-links a:hover { color: var(--gold-light); padding-left: 4px; }
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin-bottom: 1.5rem;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .footer-accred {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .accred-pill {
+      background: rgba(201,148,26,0.15);
+      border: 1px solid rgba(201,148,26,0.3);
+      border-radius: 50px;
+      padding: 0.25rem 0.8rem;
+      font-size: 0.7rem;
+      color: var(--gold-light);
+      letter-spacing: 0.06em;
+    }
+
+    /* ===== PLACEMENTS MARQUEE ===== */
+    .placements-section {
+      background: var(--white);
+      padding: 4rem 0;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .placements-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-weight: 700;
+    }
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .marquee-content {
+      display: flex;
+      flex-shrink: 0;
+      justify-content: space-around;
+      min-width: 100%;
+      gap: 5rem;
+      animation: scroll 40s linear infinite;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+    }
+    .brand-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      opacity: 0.4;
+      transition: opacity var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .marquee-item:hover .brand-logo-text { opacity: 1; transform: scale(1.1); color: var(--gold); }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* ===== WHATSAPP FAB ===== */
+    .wa-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: var(--white);
+      border-radius: 50px;
+      padding: 0.75rem 1.3rem 0.75rem 1rem;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      animation: fabPulse 3s ease-in-out infinite;
+    }
+    .wa-fab:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 40px rgba(37,211,102,0.5);
+      animation: none;
+    }
+    .wa-fab svg { width: 22px; height: 22px; fill: var(--white); flex-shrink: 0; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes scrollTestis {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes fabPulse {
+      0%, 100% { box-shadow: 0 6px 28px rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 6px 40px rgba(37,211,102,0.65); transform: translateY(-2px); }
+    }
+
+    /* ===== LAZY IMG ===== */
+    img[data-src] { opacity: 0; transition: opacity 0.5s ease; }
+    img.loaded     { opacity: 1; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      #hero { grid-template-columns: 1fr; padding: 8rem 0 4rem; }
+      .hero-form-card { max-width: 500px; margin: 0 auto; }
+      .hero-content { padding: 0 2rem; }
+      .why-grid { gap: 2.5rem; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .careers-grid { grid-template-columns: repeat(2, 1fr); }
+      .faculty-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: var(--white);
+        padding: 2rem;
+        gap: 1.4rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        z-index: 99;
+      }
+      .hamburger { display: flex; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-img-accent { display: none; }
+      .why-badge-float { left: 1rem; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .careers-grid { grid-template-columns: 1fr 1fr; }
+      .infra-grid { grid-template-columns: 1fr 1fr; }
+      .faculty-grid { grid-template-columns: 1fr; }
+      .curriculum-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 520px) {
+      .careers-grid { grid-template-columns: 1fr; }
+      .infra-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.4rem; }
+      .wa-fab span { display: none; }
+      .wa-fab { padding: 0.85rem; border-radius: 50%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="main-nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <img src="Assets/apim-main-logo.png" alt="AP-IHM Logo" style="height: 100%; width: auto; object-fit: contain;">
+      </div>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#why">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#faculty">Faculty</a></li>
+      <li><a href="#hero" class="nav-cta">Apply Now</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-slider" id="hero-slider">
+      <div class="hero-slide">
+        <img class="hero-bg-img" src="Assets/images/1.jpg" alt="AP-IHM Campus 1" />
+        <div class="hero-bg-overlay"></div>
+      </div>
+      <div class="hero-slide">
+        <img class="hero-bg-img" src="Assets/images/2.jpg" alt="AP-IHM Campus 2" />
+        <div class="hero-bg-overlay"></div>
+      </div>
+      <div class="hero-slide">
+        <img class="hero-bg-img" src="Assets/images/3.jpg" alt="AP-IHM Campus 3" />
+        <div class="hero-bg-overlay"></div>
+      </div>
+    </div>
+    <div class="hero-grain"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">AICTE Approved · GTU Affiliated · Ahmedabad</span>
+    </div>
+    <h1 class="hero-title">
+      Welcome to<br/>
+      <strong>Asia Pacific IHM</strong>
+    </h1>
+    <p class="hero-subtitle">
+      Shaping hospitality professionals for a global industry. Blending academic rigour, hands-on training, and international exposure — from classrooms to kitchens, from front offices to five-star careers.
+    </p>
+    <div class="hero-badges">
+      <div class="hero-badge"><div class="hero-badge-dot"></div>BHMCT — 4 Year Degree</div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>BBAHM — 3 Year BBA</div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>3 Year Diploma in HM</div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Certification Courses</div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Global Internships</div>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Alumni Placed</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">30+</div>
+        <div class="hero-stat-label">Industry Partners</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">15+</div>
+        <div class="hero-stat-label">Years of Excellence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMISSION FORM -->
+  <div class="hero-form-card">
+    <div class="form-card-top">
+      <h3>Apply for Admissions<br/>2025–26</h3>
+      <div class="form-divider"></div>
+      <p>Get info on programs &amp; scholarships</p>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Rahul" />
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Shah" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" placeholder="rahul@email.com" />
+    </div>
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input type="tel" placeholder="+91 98765 43210" />
+    </div>
+    <div class="form-group">
+      <label>Select Program</label>
+      <select>
+        <option value="">Choose a program</option>
+        <option>BHMCT — Bachelor of Hotel Management (4 Yrs)</option>
+        <option>BBAHM — BBA in Hotel Management (3 Yrs)</option>
+        <option>Diploma in Hotel Management (3 Yrs)</option>
+        <option>Certificate Course in Food Production</option>
+        <option>Certificate Course in Front Office</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>City / State</label>
+      <input type="text" placeholder="Ahmedabad, Gujarat" />
+    </div>
+    <button class="btn-submit" onclick="handleApply(event)">Submit Application →</button>
+    <p class="form-note">🔒 Your data is 100% confidential. No spam, ever.</p>
+  </div>
+</section>
+
+<!-- ===== PLACEMENTS MARQUEE ===== -->
+<section class="placements-section">
+  <div class="container">
+    <div class="placements-label">Our Graduates are Proudly Placed At</div>
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <div class="marquee-item"><span class="brand-logo-text">TAJ HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">OBEROI HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">ITC HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">HYATT REGENCY</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">HILTON</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">THE LEELA</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">MARRIOTT</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">RADISSON</span></div>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <div class="marquee-item"><span class="brand-logo-text">TAJ HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">OBEROI HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">ITC HOTELS</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">HYATT REGENCY</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">HILTON</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">THE LEELA</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">MARRIOTT</span></div>
+        <div class="marquee-item"><span class="brand-logo-text">RADISSON</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS STRIP ===== -->
+<div class="stats-strip">
+  <div class="stats-strip-inner" id="ticker">
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">AICTE</span>
+      <span class="stats-strip-label">Approved Institution</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">GTU</span>
+      <span class="stats-strip-label">Affiliated University</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">500+</span>
+      <span class="stats-strip-label">Successful Alumni</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">Global</span>
+      <span class="stats-strip-label">Internship Exposure</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">2</span>
+      <span class="stats-strip-label">Campus Options — City &amp; Residential</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">100%</span>
+      <span class="stats-strip-label">Placement Support</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <!-- duplicate for seamless loop -->
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">AICTE</span>
+      <span class="stats-strip-label">Approved Institution</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">GTU</span>
+      <span class="stats-strip-label">Affiliated University</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">500+</span>
+      <span class="stats-strip-label">Successful Alumni</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">Global</span>
+      <span class="stats-strip-label">Internship Exposure</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">2</span>
+      <span class="stats-strip-label">Campus Options — City &amp; Residential</span>
+    </div>
+    <div class="stats-strip-sep"></div>
+    <div class="stats-strip-item">
+      <span class="stats-strip-num">100%</span>
+      <span class="stats-strip-label">Placement Support</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHY AP-IHM ===== -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-visual reveal-left">
+        <img class="why-img-main" data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='480'%3E%3Crect width='900' height='480' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Culinary training at AP-IHM" loading="lazy" />
+        <img class="why-img-accent" data-src="https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=400&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="Front office training" loading="lazy" />
+        <div class="why-badge-float">
+          <strong>15+</strong>
+          <span>YEARS OF<br/>EXCELLENCE</span>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <span class="section-label">Why Choose AP-IHM</span>
+        <h2 class="section-title" style="font-size:clamp(2.2rem,3.5vw,3rem); margin-bottom:1rem;">
+          Hospitality is More<br/>Than a Profession —<br/><em>It's a Commitment</em>
+        </h2>
+        <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.8rem;">
+          At AP-IHM, we don't just train students — we shape confident professionals with strong values, cultural sensitivity, and a global outlook ready for the world's finest hospitality establishments.
+        </p>
+        <div class="why-features">
+          <div class="why-feature reveal" data-delay="1">
+            <div class="why-feature-icon">🎓</div>
+            <div class="why-feature-text">
+              <h4>Industry-Integrated Curriculum</h4>
+              <p>Structured around real-world hospitality demands with live labs, kitchens, and simulation rooms.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal" data-delay="2">
+            <div class="why-feature-icon">🌍</div>
+            <div class="why-feature-text">
+              <h4>Global Internship Exposure</h4>
+              <p>International internships and collaborations preparing students for five-star careers worldwide.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal" data-delay="3">
+            <div class="why-feature-icon">🏨</div>
+            <div class="why-feature-text">
+              <h4>City &amp; Residential Campus</h4>
+              <p>Two campus options — modern city campus and immersive residential nature campus experience.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal" data-delay="4">
+            <div class="why-feature-icon">💼</div>
+            <div class="why-feature-text">
+              <h4>Excellent Placement Support</h4>
+              <p>Dedicated training and placement cell with strong industry connections across sectors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section id="programs">
+  <div class="container">
+    <div class="programs-header reveal">
+      <span class="section-label">Our Academic Offerings</span>
+      <h2 class="section-title">Programs Designed for<br/><em>Industry Readiness</em></h2>
+    </div>
+    <div class="programs-grid">
+
+      <div class="program-card reveal" data-delay="1">
+        <img class="program-card-img" data-src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=700&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='200'%3E%3Crect width='700' height='200' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="BHMCT Program" loading="lazy" />
+        <div class="program-card-badge">4 Years</div>
+        <div class="program-card-body">
+          <h3>BHMCT</h3>
+          <p class="prog-full">Bachelor of Hotel Management &amp; Catering Technology</p>
+          <div class="prog-duration">🏛 AICTE Approved · GTU Affiliated</div>
+          <div class="prog-highlights">
+            <div class="prog-highlight">Rooms Division, F&amp;B, Front Office</div>
+            <div class="prog-highlight">Bakery, Bar &amp; International Cuisines</div>
+            <div class="prog-highlight">6-Month Industrial Training (4th Year)</div>
+            <div class="prog-highlight">Research Project &amp; Specialization</div>
+          </div>
+          <a href="#" class="prog-link">Explore Program →</a>
+        </div>
+      </div>
+
+      <div class="program-card reveal" data-delay="2">
+        <img class="program-card-img" data-src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='200'%3E%3Crect width='700' height='200' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="BBAHM Program" loading="lazy" />
+        <div class="program-card-badge">3 Years</div>
+        <div class="program-card-body">
+          <h3>BBAHM</h3>
+          <p class="prog-full">Bachelor of Business Administration in Hotel Management</p>
+          <div class="prog-duration">📋 University Recognized</div>
+          <div class="prog-highlights">
+            <div class="prog-highlight">Business &amp; Management Focus</div>
+            <div class="prog-highlight">Hotel Operations &amp; Administration</div>
+            <div class="prog-highlight">Marketing, HR &amp; Finance</div>
+            <div class="prog-highlight">Industry Internships Included</div>
+          </div>
+          <a href="#" class="prog-link">Explore Program →</a>
+        </div>
+      </div>
+
+      <div class="program-card reveal" data-delay="3">
+        <img class="program-card-img" data-src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=700&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='200'%3E%3Crect width='700' height='200' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="Diploma Program" loading="lazy" />
+        <div class="program-card-badge">3 Years</div>
+        <div class="program-card-body">
+          <h3>Diploma in HM</h3>
+          <p class="prog-full">3-Year Diploma in Hotel Management & Operations</p>
+          <div class="prog-duration">⭐ Core Department Focus</div>
+          <div class="prog-highlights">
+            <div class="prog-highlight">Front Office & Housekeeping</div>
+            <div class="prog-highlight">Food Production & Bakery</div>
+            <div class="prog-highlight">Food & Beverage Services</div>
+            <div class="prog-highlight">Comprehensive Practical Training</div>
+          </div>
+          <a href="#" class="prog-link">Explore Program →</a>
+        </div>
+      </div>
+
+      <div class="program-card reveal" data-delay="4">
+        <img class="program-card-img" data-src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=700&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='200'%3E%3Crect width='700' height='200' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Certification Courses" loading="lazy" />
+        <div class="program-card-badge">Short Term</div>
+        <div class="program-card-body">
+          <h3>Certification</h3>
+          <p class="prog-full">Professional Certification Courses in Hospitality</p>
+          <div class="prog-duration">⚡ Fast-Track Career Entry</div>
+          <div class="prog-highlights">
+            <div class="prog-highlight">Food Production &amp; Culinary Arts</div>
+            <div class="prog-highlight">Front Office Operations</div>
+            <div class="prog-highlight">Housekeeping Management</div>
+            <div class="prog-highlight">Food &amp; Beverage Service</div>
+          </div>
+          <a href="#" class="prog-link">Explore Program →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CURRICULUM ===== -->
+<section id="curriculum">
+  <div class="container">
+    <div class="curriculum-grid">
+      <div class="reveal-left">
+        <span class="section-label">BHMCT Curriculum</span>
+        <h2 class="section-title" style="font-size:clamp(2.2rem,3.5vw,3rem); margin-bottom:1.4rem;">
+          A Structured 4-Year<br/><em>Learning Journey</em>
+        </h2>
+        <div class="curriculum-intro">
+          <p>Our revised curriculum framework blends hospitality fundamentals with advanced operational skills, international exposure, and specialization — aligned to AICTE and GTU standards for global industry readiness.</p>
+        </div>
+        <div class="curriculum-pill-row">
+          <div class="curriculum-pill">Food Production</div>
+          <div class="curriculum-pill">Front Office</div>
+          <div class="curriculum-pill">Housekeeping</div>
+          <div class="curriculum-pill">F&amp;B Management</div>
+          <div class="curriculum-pill">Hospitality French</div>
+          <div class="curriculum-pill">Hotel Accounting</div>
+          <div class="curriculum-pill">Tourism Law</div>
+          <div class="curriculum-pill">Event Management</div>
+          <div class="curriculum-pill">Eco Tourism</div>
+          <div class="curriculum-pill">Research Project</div>
+        </div>
+        <div style="margin-top:2rem;">
+          <img data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='240'%3E%3Crect width='600' height='240' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Curriculum practical" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:var(--radius-md);" />
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="accordion" id="accordion">
+          <div class="acc-item open">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <div class="acc-header-left">
+                <div class="acc-year">1</div>
+                <div>
+                  <h4>First Year</h4>
+                  <span>Semester 1 &amp; 2 — Foundations</span>
+                </div>
+              </div>
+              <div class="acc-chevron">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="var(--burgundy)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="acc-body">
+              <div class="acc-subjects">
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Introduction to Hospitality &amp; Tourism Industry</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Fundamentals of Rooms Division Management I &amp; II</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Fundamentals of Food &amp; Beverage Management I &amp; II</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Business Communication &amp; Computer Application</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Fundamentals of Travel &amp; Tourism</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Indian Knowledge System &amp; Personality Skills</div>
+              </div>
+              <div class="acc-focus">Focus: Industry orientation, communication skills, digital literacy &amp; sustainability.</div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <div class="acc-header-left">
+                <div class="acc-year">2</div>
+                <div>
+                  <h4>Second Year</h4>
+                  <span>Semester 3 &amp; 4 — Skill Advancement</span>
+                </div>
+              </div>
+              <div class="acc-chevron">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="var(--burgundy)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="acc-body">
+              <div class="acc-subjects">
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Intermediate Food Production &amp; F&amp;B Service</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Advanced Rooms Division Management</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Hospitality French &amp; Basic Hotel Accounting</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Bakery, Confectionery &amp; Bar Beverages</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Food Safety, Hygiene &amp; F&amp;B Control</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Hospitality &amp; Tourism Law</div>
+              </div>
+              <div class="acc-focus">Focus: Specialization, financial literacy, legal knowledge &amp; hygiene standards.</div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <div class="acc-header-left">
+                <div class="acc-year">3</div>
+                <div>
+                  <h4>Third Year</h4>
+                  <span>Semester 5 &amp; 6 — Management</span>
+                </div>
+              </div>
+              <div class="acc-chevron">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="var(--burgundy)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="acc-body">
+              <div class="acc-subjects">
+                <div class="acc-subject"><div class="acc-subject-dot"></div>International Cuisines &amp; F&amp;B Operations</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Front Office Administration &amp; Management</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Human Resource &amp; Marketing Management</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Hotel Engineering &amp; Maintenance</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Resort Designing, Development &amp; Management</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Event &amp; Disaster Management</div>
+              </div>
+              <div class="acc-focus">Focus: Leadership, operations management &amp; resort &amp; event expertise.</div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <div class="acc-header-left">
+                <div class="acc-year">4</div>
+                <div>
+                  <h4>Fourth Year</h4>
+                  <span>Semester 7 &amp; 8 — Specialization</span>
+                </div>
+              </div>
+              <div class="acc-chevron">
+                <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="var(--burgundy)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="acc-body">
+              <div class="acc-subjects">
+                <div class="acc-subject"><div class="acc-subject-dot"></div>F&amp;B Management &amp; Control II</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Industrial Training II — Specialization (4 Months)</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Eco Tourism, Ecotels &amp; Sustainable Development</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Architecture &amp; Interior Designing</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Research Project</div>
+                <div class="acc-subject"><div class="acc-subject-dot"></div>Room Division Management II</div>
+              </div>
+              <div class="acc-focus">Focus: Industry specialization, sustainability &amp; research leadership.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREERS ===== -->
+<section id="careers">
+  <div class="container">
+    <div class="careers-header reveal">
+      <span class="section-label">Career Opportunities</span>
+      <h2 class="section-title">Your Hospitality Degree Opens<br/><em style="color:var(--gold-light);">Unlimited Doors</em></h2>
+      <p>Careers in hospitality extend far beyond hotels — encompassing airlines, cruises, tourism, events, and beyond.</p>
+    </div>
+    <div class="careers-grid">
+      <div class="career-card reveal" data-delay="1">
+        <div class="career-card-icon">🏨</div>
+        <h4>Luxury Hotels &amp; Resorts</h4>
+        <p>Management roles across 5-star properties, boutique hotels, and international resort chains.</p>
+      </div>
+      <div class="career-card reveal" data-delay="2">
+        <div class="career-card-icon">✈️</div>
+        <h4>Airlines &amp; Cruise Lines</h4>
+        <p>Hospitality-centric roles in aviation, cruise ships, and luxury maritime experiences.</p>
+      </div>
+      <div class="career-card reveal" data-delay="3">
+        <div class="career-card-icon">🍽️</div>
+        <h4>Restaurant &amp; F&amp;B Chains</h4>
+        <p>Leadership in fine dining, QSR brands, institutional catering, and IRCTC operations.</p>
+      </div>
+      <div class="career-card reveal" data-delay="4">
+        <div class="career-card-icon">🌐</div>
+        <h4>Travel &amp; Tourism</h4>
+        <p>Agencies, tour operators, destination management, and global tourism enterprises.</p>
+      </div>
+      <div class="career-card reveal" data-delay="1">
+        <div class="career-card-icon">🎪</div>
+        <h4>Events &amp; Weddings</h4>
+        <p>High-growth sector in event management, luxury weddings, and MICE industry.</p>
+      </div>
+      <div class="career-card reveal" data-delay="2">
+        <div class="career-card-icon">📚</div>
+        <h4>Academics &amp; Training</h4>
+        <p>Teaching, faculty roles, and hospitality training institutions across India and abroad.</p>
+      </div>
+      <div class="career-card reveal" data-delay="3">
+        <div class="career-card-icon">🏥</div>
+        <h4>Healthcare Hospitality</h4>
+        <p>Facility management and patient experience roles in premium hospitals and wellness resorts.</p>
+      </div>
+      <div class="career-card reveal" data-delay="4">
+        <div class="career-card-icon">🎖️</div>
+        <h4>Armed Forces &amp; Corporate</h4>
+        <p>Chef and managerial housekeeping roles in defence, BPOs, and service-oriented industries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INFRASTRUCTURE ===== -->
+<section id="infrastructure">
+  <div class="container">
+    <div class="infra-header reveal">
+      <span class="section-label">Learning Infrastructure</span>
+      <h2 class="section-title">Real Industry Environments,<br/><em>Right on Campus</em></h2>
+    </div>
+    <div class="infra-grid">
+      <div class="infra-card reveal" data-delay="1">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Kitchen Lab" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">👨‍🍳</div>
+          <h4>Hi-Tech Kitchens &amp; Training Restaurants</h4>
+          <p>Professional-grade culinary labs replicating real hotel kitchen environments.</p>
+        </div>
+      </div>
+      <div class="infra-card reveal" data-delay="2">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="Front Office" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">🛎️</div>
+          <h4>Front Office Simulation Lab</h4>
+          <p>Full-scale reception and PMS simulation for real-world front office training.</p>
+        </div>
+      </div>
+      <div class="infra-card reveal" data-delay="3">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Model Rooms" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">🛏️</div>
+          <h4>Housekeeping Model Rooms</h4>
+          <p>Professionally equipped mock guest rooms for hands-on housekeeping practice.</p>
+        </div>
+      </div>
+      <div class="infra-card reveal" data-delay="1">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="Computer Lab" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">💻</div>
+          <h4>Computer &amp; PMS Lab</h4>
+          <p>Industry-standard Property Management System training on modern hardware.</p>
+        </div>
+      </div>
+      <div class="infra-card reveal" data-delay="2">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23EDD8E2'/%3E%3C/svg%3E" alt="Library" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">📚</div>
+          <h4>Resource-Rich Library</h4>
+          <p>Extensive collection of hospitality, tourism, and management references and journals.</p>
+        </div>
+      </div>
+      <div class="infra-card reveal" data-delay="3">
+        <img class="infra-card-img" data-src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='180'%3E%3Crect width='600' height='180' fill='%23F5E6C0'/%3E%3C/svg%3E" alt="Conference" loading="lazy" />
+        <div class="infra-card-body">
+          <div class="infra-icon">🎤</div>
+          <h4>Seminar &amp; Conference Facilities</h4>
+          <p>Modern AV-equipped spaces for workshops, guest lectures, and industry events.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FACULTY ===== -->
+<section id="faculty">
+  <div class="container">
+    <div class="faculty-header reveal">
+      <span class="section-label">Academic Leadership</span>
+      <h2 class="section-title">Experienced Faculty &amp;<br/><em>Industry Experts</em></h2>
+    </div>
+    <div class="faculty-grid">
+      <div class="faculty-card reveal" data-delay="1">
+        <div class="faculty-avatar">RS</div>
+        <h4>Dr. Rajesh Sharma</h4>
+        <p class="faculty-role">PhD in Management, 20+ Years of Experience in Hospitality Education</p>
+        <span class="faculty-tag">DEPARTMENT HEAD</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="2">
+        <div class="faculty-avatar">AD</div>
+        <h4>Prof. Anita Desai</h4>
+        <p class="faculty-role">Marketing Expert, Former IIM Faculty — Consumer Behaviour &amp; Strategy</p>
+        <span class="faculty-tag">MARKETING</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="3">
+        <div class="faculty-avatar">GV</div>
+        <h4>Prof (Dr.) G K Viju</h4>
+        <p class="faculty-role">PhD (SE); PhD (QM) / DBA (SM) in Management, 28+ Years of Experience</p>
+        <span class="faculty-tag">MANAGEMENT</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="4">
+        <div class="faculty-avatar">SC</div>
+        <h4>Mr. Sanjay Chakraborty</h4>
+        <p class="faculty-role">Founder &amp; Chief Marketing Communication Advisor, ESS-K-SEE Consultancy</p>
+        <span class="faculty-tag">INDUSTRY EXPERT</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="5">
+        <div class="faculty-avatar">IV</div>
+        <h4>Mr. Ijan Vaidya</h4>
+        <p class="faculty-role">Officer on Special Duty (OSD), Knowledge Consortium of Gujarat</p>
+        <span class="faculty-tag">GOVT. LIAISON</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="6">
+        <div class="faculty-avatar">MG</div>
+        <h4>Ms. Megha Gajjar</h4>
+        <p class="faculty-role">Investment Lead, iHub Ahmedabad — Entrepreneurship &amp; Innovation</p>
+        <span class="faculty-tag">ENTREPRENEURSHIP</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="1">
+        <div class="faculty-avatar">KK</div>
+        <h4>Mr. Kishan Kumar</h4>
+        <p class="faculty-role">Assistant Professor of Food & Beverages. Extensive industry experience in premium hotels.</p>
+        <span class="faculty-tag">F&B SERVICE</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="2">
+        <div class="faculty-avatar">MS</div>
+        <h4>Mr. Mukul Sahu</h4>
+        <p class="faculty-role">Assistant Professor of Food Production. MSc in Hospitality Administration. 5+ years of teaching & chef experience.</p>
+        <span class="faculty-tag">FOOD PRODUCTION</span>
+      </div>
+      <div class="faculty-card reveal" data-delay="3">
+        <div class="faculty-avatar">NK</div>
+        <h4>Mr. Naveen Kumar</h4>
+        <p class="faculty-role">Assistant Professor of Rooms Division. MSc in Hospitality Administration (IHM Lucknow). Industry & academic expert.</p>
+        <span class="faculty-tag">ROOMS DIVISION</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-header reveal">
+      <span class="section-label">Student Success Stories</span>
+      <h2 class="section-title">Words from Our<br/><em>AP-IHM Family</em></h2>
+    </div>
+  </div>
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testi-track">
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">AP-IHM gave me the perfect foundation to launch my career at a 5-star property in Dubai. The practical training was exceptional — I was ready from day one.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RK</div>
+          <div>
+            <div class="testi-name">Raj Kumar Patel</div>
+            <div class="testi-batch">BHMCT Batch 2022 · Now at Marriott, Dubai</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The industry exposure and internship opportunities here were truly exceptional. I got placed at a luxury resort before even completing my final semester.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SP</div>
+          <div>
+            <div class="testi-name">Sneha Patel</div>
+            <div class="testi-batch">BHMCT Batch 2023 · Now at Taj Hotels</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">From culinary labs to the mock front office, everything was designed for real industry practice. AP-IHM's training gave me the confidence to excel.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <div class="testi-name">Arjun Mehta</div>
+            <div class="testi-batch">BBAHM Batch 2024 · Now at Hyatt Regency</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The personality development and grooming sessions at AP-IHM shaped my entire professional demeanor. I'm now managing a team of 20 at a Hilton property.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
+          <div>
+            <div class="testi-name">Priya Shah</div>
+            <div class="testi-batch">BHMCT Batch 2021 · Now at Hilton, Bangalore</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">My international internship in Singapore was arranged through AP-IHM's global network. It truly set me apart from peers from other institutions.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">VR</div>
+          <div>
+            <div class="testi-name">Vivek Rao</div>
+            <div class="testi-batch">BHMCT Batch 2022 · Now at Shangri-La, Singapore</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">AP-IHM gave me the perfect foundation to launch my career at a 5-star property in Dubai. The practical training was exceptional — I was ready from day one.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RK</div>
+          <div>
+            <div class="testi-name">Raj Kumar Patel</div>
+            <div class="testi-batch">BHMCT Batch 2022 · Now at Marriott, Dubai</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The industry exposure and internship opportunities here were truly exceptional. I got placed at a luxury resort before even completing my final semester.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SP</div>
+          <div>
+            <div class="testi-name">Sneha Patel</div>
+            <div class="testi-batch">BHMCT Batch 2023 · Now at Taj Hotels</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">From culinary labs to the mock front office, everything was designed for real industry practice. AP-IHM's training gave me the confidence to excel.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <div class="testi-name">Arjun Mehta</div>
+            <div class="testi-batch">BBAHM Batch 2024 · Now at Hyatt Regency</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The personality development and grooming sessions at AP-IHM shaped my entire professional demeanor. I'm now managing a team of 20 at a Hilton property.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
+          <div>
+            <div class="testi-name">Priya Shah</div>
+            <div class="testi-batch">BHMCT Batch 2021 · Now at Hilton, Bangalore</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">My international internship in Singapore was arranged through AP-IHM's global network. It truly set me apart from peers from other institutions.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">VR</div>
+          <div>
+            <div class="testi-name">Vivek Rao</div>
+            <div class="testi-batch">BHMCT Batch 2022 · Now at Shangri-La, Singapore</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta-section">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label" style="color:var(--gold);">Begin Your Journey</span>
+      <h2 class="cta-title">Your Hospitality Career<br/><strong>Starts Right Here</strong></h2>
+      <p class="cta-sub">Join hundreds of AP-IHM alumni leading in top hotels, resorts, airlines, and hospitality enterprises worldwide.</p>
+      <div class="cta-buttons">
+        <a href="#hero" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 2C6.47461 2 2 6.48 2 12C2 17.52 6.47461 22 11.9997 22C17.5251 22 22 17.52 22 12C22 6.48 17.5251 2 11.9997 2ZM12 20C7.58196 20 4 16.42 4 12C4 7.58 7.58196 4 12 4C16.418 4 20 7.58 20 12C20 16.42 16.418 20 12 20ZM12.5 7H11V13L16.75 16.35L17.5 15.08L12.5 12.25V7Z"/></svg>
+          Apply for 2025–26
+        </a>
+        <a href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20admissions%20at%20AP-IHM%20Ahmedabad." class="btn-outline" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-mark">
+            <img src="Assets/apim-main-logo.png" alt="AP-IHM Logo" style="height: 100%; width: auto; object-fit: contain;">
+          </div>
+          </div>
+        </div>
+        <p>A premier institution dedicated to developing skilled, confident, and industry-ready hospitality professionals. AICTE Approved · GTU Affiliated · Ahmedabad.</p>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Facebook">f</a>
+          <a class="social-btn" href="#" aria-label="Instagram">in</a>
+          <a class="social-btn" href="#" aria-label="YouTube">▶</a>
+          <a class="social-btn" href="#" aria-label="LinkedIn">li</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Programs</h5>
+        <div class="footer-links">
+          <a href="#">BHMCT — 4 Year Degree</a>
+          <a href="#">BBAHM — BBA Program</a>
+          <a href="#">Certification Courses</a>
+          <a href="#">International Internships</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Admissions</h5>
+        <div class="footer-links">
+          <a href="#">Apply Online</a>
+          <a href="#">Eligibility Criteria</a>
+          <a href="#">Fee Structure</a>
+          <a href="#">Scholarship Info</a>
+          <a href="#">Campus Tour</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Campuses</h5>
+        <div class="footer-campus">
+          <h6>City Campus</h6>
+          <div class="footer-campus-info">
+            <p>9 Ashram Road, Vidya Vihar Colony Rd, Opp. Fortune Landmark Hotel, Ahmedabad, Gujarat 380013</p>
+            <p>📞 <a href="tel:07927556140">079-2755 6140</a> / <a href="tel:07927556141">41</a></p>
+            <p>✉️ <a href="mailto:admissions@apim.ac.in">admissions@apim.ac.in</a></p>
+          </div>
+        </div>
+        <div class="footer-campus">
+          <h6>Nature Campus</h6>
+          <div class="footer-campus-info">
+            <p>Village-Bhoyani, Kadi – Katosan Road, Ta : Detroj, Dist : Ahmedabad</p>
+            <p>✉️ <a href="mailto:info@apimindia.net">info@apimindia.net</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>© 2025 Asia Pacific Institute of Hotel Management (AP-IHM), Ahmedabad. All rights reserved.</p>
+      <div class="footer-accred">
+        <span class="accred-pill">AICTE Approved</span>
+        <span class="accred-pill">GTU Affiliated</span>
+        <span class="accred-pill">MoHRD Recognized</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FAB ===== -->
+<a class="wa-fab" href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20admissions%20at%20AP-IHM%20Ahmedabad." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+  </svg>
+  <span>Chat with Us</span>
+</a>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  hamburger.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+  });
+
+  // ── LAZY LOAD IMAGES ──
+  const lazyImgs = document.querySelectorAll('img[data-src]');
+  const imgObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.onload = () => img.classList.add('loaded');
+        img.onerror = () => img.classList.add('loaded');
+        observer.unobserve(img);
+      }
+    });
+  }, { rootMargin: '200px 0px' });
+  lazyImgs.forEach(img => imgObserver.observe(img));
+
+  // ── SCROLL REVEAL ──
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ── ACCORDION ──
+  function toggleAcc(header) {
+    const item = header.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── FORM SUBMIT ──
+  function handleApply(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Application Received!';
+    btn.style.background = 'linear-gradient(135deg, #2E7D32, #1B5E20)';
+    setTimeout(() => {
+      btn.textContent = 'Submit Application →';
+      btn.style.background = '';
+    }, 3500);
+  }
+
+  // ── HERO SLIDER ──
+  const heroSlider = document.getElementById('hero-slider');
+  const slides = document.querySelectorAll('.hero-slide');
+  let currentSlide = 0;
+  const slideCount = slides.length;
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slideCount;
+    if (heroSlider) {
+      heroSlider.style.transform = `translateX(-${currentSlide * (100 / slideCount)}%)`;
+    }
+  }
+
+  setInterval(nextSlide, 5000); // Change slide every 5 seconds
+</script>
+
+</body>
+</html>
